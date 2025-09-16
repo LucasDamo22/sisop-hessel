@@ -21,8 +21,7 @@ enum class ModoEnderecamento {
 
 enum class Scheduling {
     RR,
-    FCFS,
-    INDEFINIDO
+    FCFS
 };
 
 enum class Estado {
@@ -64,6 +63,9 @@ public:
     std::vector<Instrucao> codigo;
     std::map<std::string, int> dados;
 
+    void tostr() const;
+    void imprimir_instrucao(size_t endereco) const;
+
     // Construtor padrão
-    Processo() : id(0), pc(0), acc(0), sched(Scheduling::INDEFINIDO), estado(Estado::NEW), deadline(0xffffffff), prio(Prioridade::BAIXA) {}
+    Processo() : id(0), pc(0), acc(0), sched(Scheduling::FCFS), estado(Estado::NEW), deadline(0xffffffff), prio(Prioridade::BAIXA) {}
 };

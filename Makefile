@@ -3,7 +3,7 @@ SOURCEDIR :=./src
 HEADERDIR :=./include
 PROGRAM_NAME = main
 
-CXXFLAGS  +=-Iinclude
+CXXFLAGS  +=-Iinclude -std=c++17
 
 #link with other libraries
 LD_FLAGS :=-lm

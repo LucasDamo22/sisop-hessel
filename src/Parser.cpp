@@ -79,18 +79,25 @@ void Parser::passo2_gerar_estruturas(std::ifstream& arquivo, Processo& processo,
     std::string linha;
     bool em_secao_codigo = false;
     bool em_secao_dados = false;
+    bool em_secao_escalonador = false;
 
     while (std::getline(arquivo, linha)) {
-        // A LÓGICA DE REMOÇÃO DE COMENTÁRIOS FOI REMOVIDA DAQUI
+        size_t pos_comentario = linha.find(" #");
+        if (pos_comentario != std::string::npos) {
+            linha = linha.substr(0, pos_comentario);
+        }
+
         linha = trim(linha);
 
         if (linha.empty()) continue;
-        if (linha.rfind("#", 0) == 0) continue; // Ignora linhas que começam com #
+        if (linha.rfind("#", 0) == 0) continue;
 
-        if (linha == ".code") { em_secao_codigo = true; em_secao_dados = false; continue; }
+        if (linha == ".code") { em_secao_codigo = true; em_secao_dados = false; em_secao_escalonador = false; continue; }
         if (linha == ".endcode") { em_secao_codigo = false; continue; }
-        if (linha == ".data") { em_secao_dados = true; em_secao_codigo = false; continue; }
+        if (linha == ".data") { em_secao_dados = true; em_secao_codigo = false; em_secao_escalonador = false; continue; }
         if (linha == ".enddata") { em_secao_dados = false; continue; }
+        if (linha == ".scheduling") { em_secao_escalonador = true; em_secao_codigo = false; em_secao_dados = false; continue; }
+        if (linha == ".endscheduling") { em_secao_escalonador = false; continue; }
 
         if (em_secao_codigo) {
             size_t pos_label = linha.find(':');
@@ -101,7 +108,7 @@ void Parser::passo2_gerar_estruturas(std::ifstream& arquivo, Processo& processo,
 
             std::stringstream ss(linha);
             std::string mnem, op;
-            ss >> mnem >> op; // Lê o mnemônico e o operando. O resto (o comentário) é ignorado.
+            ss >> mnem >> op;
 
             Instrucao instr;
             instr.opcode = string_to_opcode(mnem);
@@ -126,6 +133,22 @@ void Parser::passo2_gerar_estruturas(std::ifstream& arquivo, Processo& processo,
             ss >> nome_var >> valor_var;
             if (!nome_var.empty()) {
                 processo.dados[nome_var] = valor_var;
+            }
+        } else if (em_secao_escalonador) {
+            std::stringstream ss(linha);
+            std::string tipo;
+            std::string valor;
+            ss >> tipo >> valor;
+            if (tipo == "RR") { 
+                processo.sched = Scheduling::RR;
+                if (std::stoi(valor) == static_cast<int>(Prioridade::ALTA)) {
+                    processo.prio = Prioridade::ALTA;
+                } else {
+                    processo.prio = Prioridade::BAIXA;
+                }
+            }
+            if (tipo == "FCFS") {
+                processo.sched = Scheduling::FCFS;
             }
         }
     }

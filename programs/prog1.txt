@@ -10,3 +10,7 @@
 .data
   a 10
 .enddata
+
+.scheduling
+  RR #1
+.endscheduling
