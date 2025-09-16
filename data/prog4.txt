@@ -1,0 +1,13 @@
+.code
+load base     # acc <- 5 (carrega o valor da base)
+mult altura   # acc <- 5 * 8 = 40 (multiplica pela altura)
+store area    # pmem[area] <- 40 (guarda o resultado na variável 'area')
+syscall 1     # imprime o valor 40 que está no acumulador
+syscall 0     # finaliza o programa
+.endcode
+
+.data
+base 5
+altura 8
+area 0
+.enddata

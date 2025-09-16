@@ -1,0 +1,14 @@
+.code
+load numero   # acc <- 15 (carrega o número a ser verificado)
+BRNEG fim     # se acc for negativo, desvia para 'fim'
+BRZERO fim    # se acc for zero, desvia para 'fim'
+positiv:
+load #1       # acc <- 1 (carrega o valor 1 para indicar 'verdadeiro')
+syscall 1     # imprime 1
+fim:
+syscall 0     # finaliza o programa
+.endcode
+
+.data
+numero 15
+.enddata
