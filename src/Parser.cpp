@@ -156,9 +156,6 @@ void Parser::passo2_gerar_estruturas(std::ifstream& arquivo, Processo& processo,
             if (tipo == "arrival") {
                 processo.arrival_time = std::stoi(valor);
             }
-            if(tipo == "burst") {
-                processo.burst_time = std::stoi(valor);
-            }
         }
     }
 }

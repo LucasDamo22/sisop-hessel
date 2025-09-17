@@ -29,8 +29,7 @@ fim:
 .enddata
 
 .scheduling
-  RR 5
+  RR 9
   arrival 5
-  burst 9
 .endscheduling
 

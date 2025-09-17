@@ -12,8 +12,8 @@ public:
     int elapsed_time;
     
     // Filas para os processos prontos (guardam ponteiros)
-    std::vector<Processo*> real_time;
-    std::vector<Processo*> best_effort;
+    std::deque<Processo*> real_time;
+    std::deque<Processo*> best_effort;
     std::vector<Processo*> newprocess;
     std::vector<Processo*> waiting;
     std::vector<Processo*> exit;
@@ -33,5 +33,5 @@ public:
 
 private:
     // Método auxiliar privado para executar uma única instrução
-    bool executarInstrucao(Processo* p);
+    bool executarInstrucao();
 };

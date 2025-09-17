@@ -33,5 +33,4 @@ fim:
 .scheduling
   FCFS
   arrival 2
-  burst 15
 .endscheduling

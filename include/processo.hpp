@@ -1,10 +1,9 @@
-#pragma once // Evita que o header seja incluído múltiplas vezes
+#pragma once
 
 #include <string>
 #include <vector>
 #include <map>
 
-// Enum para todos os mnemônicos possíveis
 enum class OpCode {
     ADD, SUB, MULT, DIV,
     LOAD, STORE,
@@ -13,7 +12,6 @@ enum class OpCode {
     INVALIDO
 };
 
-// Enum para os modos de endereçamento
 enum class ModoEnderecamento {
     DIRETO,
     IMEDIATO
@@ -32,9 +30,6 @@ enum class Estado {
     EXIT
 };
 
-
-
-// Estrutura para representar uma única instrução traduzida
 struct Instrucao {
     OpCode opcode;
     std::string operando_str;
@@ -44,21 +39,21 @@ struct Instrucao {
     Instrucao() : opcode(OpCode::INVALIDO),  operando_val(0), modo(ModoEnderecamento::DIRETO) {}
 };
 
-// Classe que representa o Processo, contendo seu código, dados e PCB
+std::string scheduling_to_string(Scheduling s);
+std::string estado_to_string(Estado e);
+std::string opcode_to_string(OpCode op);
+
 class Processo {
 public:
-    // PCB - Process Control Block
     int id;
     int pc;
     int acc;
     int arrival_time;
     int prio;
-    int burst_time;
+    int wait_time;
     Scheduling sched;
     Estado estado;
     
-    
-    // Segmentos de memória do processo
     std::vector<Instrucao> codigo;
     std::map<std::string, int> dados;
 
@@ -66,6 +61,5 @@ public:
     void imprimir_instrucao(size_t endereco) const;
 
 
-    // Construtor padrão
-    Processo() : id(0), pc(0), acc(0), sched(Scheduling::FCFS), estado(Estado::NEW), prio(0x7fffffff) {}
+    Processo() : id(0), pc(0), acc(0), wait_time(0), sched(Scheduling::FCFS), estado(Estado::NEW), prio(0x7fffffff) {}
 };

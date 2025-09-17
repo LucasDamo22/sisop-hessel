@@ -62,7 +62,7 @@ void Processo::tostr() const {
     std::cout << "Estado: " << estado_to_string(this->estado) << std::endl;
     std::cout << "Prioridade: " << this->prio << std::endl;
     std::cout << "Arrival: " << this->arrival_time << std::endl;
-    std::cout << "Burst: " << this->burst_time << std::endl;
+    std::cout << "Wait: " << this->wait_time << std::endl;
     
     std::cout << "\n[SEGMENTO DE CODIGO]" << std::endl;
     for (size_t i = 0; i < codigo.size(); ++i) {
