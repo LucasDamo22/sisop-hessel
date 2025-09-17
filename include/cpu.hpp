@@ -9,6 +9,8 @@ class CPU {
 public:
     const int QUANTUM = 4; // Quantum para processos Round Robin
     int pid;
+    int elapsed_time;
+    
     // Filas para os processos prontos (guardam ponteiros)
     std::vector<Processo*> real_time;
     std::vector<Processo*> best_effort;
@@ -25,7 +27,9 @@ public:
     // Métodos públicos
     void boot();
     void executar();
+    void escalonador();
     void spawn_proc();
+    void insere_realtime(Processo *p1);
 
 private:
     // Método auxiliar privado para executar uma única instrução

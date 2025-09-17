@@ -1,5 +1,5 @@
 .code
-  syscall 2 # digi:: tar numero 2 acc <- 2
+  syscall 2		# digitar numero 2: acc<- 2
   store numero		# pmem[numero] <- 2
 loop:
   sub controle		# acc <- 2-2=0
@@ -32,4 +32,6 @@ fim:
 
 .scheduling
   FCFS
+  arrival 2
+  burst 15
 .endscheduling

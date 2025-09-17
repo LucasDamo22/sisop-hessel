@@ -23,13 +23,6 @@ std::string estado_to_string(Estado e) {
     }
 }
 
-std::string prioridade_to_string(Prioridade p) {
-    switch (p) {
-        case Prioridade::ALTA:  return "Alta";
-        case Prioridade::BAIXA: return "Baixa";
-        default:                return "Desconhecida";
-    }
-}
 
 
 std::string opcode_to_string(OpCode op) {
@@ -67,7 +60,9 @@ void Processo::tostr() const {
     std::cout << "--- Detalhes do Processo ID: " << this->id << " ---" << std::endl;
     std::cout << "Escalonamento: " << scheduling_to_string(this->sched) << std::endl;
     std::cout << "Estado: " << estado_to_string(this->estado) << std::endl;
-    std::cout << "Prioridade: " << prioridade_to_string(this->prio) << std::endl;
+    std::cout << "Prioridade: " << this->prio << std::endl;
+    std::cout << "Arrival: " << this->arrival_time << std::endl;
+    std::cout << "Burst: " << this->burst_time << std::endl;
     
     std::cout << "\n[SEGMENTO DE CODIGO]" << std::endl;
     for (size_t i = 0; i < codigo.size(); ++i) {

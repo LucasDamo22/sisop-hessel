@@ -24,6 +24,13 @@ fim:
 .data
   a 0
   b 1
-  controle 277
+  controle 0
   aux 0
 .enddata
+
+.scheduling
+  RR 5
+  arrival 5
+  burst 9
+.endscheduling
+

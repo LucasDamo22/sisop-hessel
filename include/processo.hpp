@@ -32,10 +32,7 @@ enum class Estado {
     EXIT
 };
 
-enum class Prioridade {
-    ALTA,
-    BAIXA
-};
+
 
 // Estrutura para representar uma única instrução traduzida
 struct Instrucao {
@@ -54,10 +51,12 @@ public:
     int id;
     int pc;
     int acc;
-    int deadline;
+    int arrival_time;
+    int prio;
+    int burst_time;
     Scheduling sched;
     Estado estado;
-    Prioridade prio;
+    
     
     // Segmentos de memória do processo
     std::vector<Instrucao> codigo;
@@ -66,6 +65,7 @@ public:
     void tostr() const;
     void imprimir_instrucao(size_t endereco) const;
 
+
     // Construtor padrão
-    Processo() : id(0), pc(0), acc(0), sched(Scheduling::FCFS), estado(Estado::NEW), deadline(0xffffffff), prio(Prioridade::BAIXA) {}
+    Processo() : id(0), pc(0), acc(0), sched(Scheduling::FCFS), estado(Estado::NEW), prio(0x7fffffff) {}
 };

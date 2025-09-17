@@ -100,6 +100,7 @@ void Parser::passo2_gerar_estruturas(std::ifstream& arquivo, Processo& processo,
         if (linha == ".endscheduling") { em_secao_escalonador = false; continue; }
 
         if (em_secao_codigo) {
+            // Agora, esta busca por ':' é segura, pois a parte do comentário já foi removida.
             size_t pos_label = linha.find(':');
             if (pos_label != std::string::npos) {
                 linha = trim(linha.substr(pos_label + 1));
@@ -139,16 +140,24 @@ void Parser::passo2_gerar_estruturas(std::ifstream& arquivo, Processo& processo,
             std::string tipo;
             std::string valor;
             ss >> tipo >> valor;
+            // std::cout<< tipo << std::endl;
+            // std::cout<< valor << std::endl;
+            // std::cout <<"================" << std::endl;
+
             if (tipo == "RR") { 
                 processo.sched = Scheduling::RR;
-                if (std::stoi(valor) == static_cast<int>(Prioridade::ALTA)) {
-                    processo.prio = Prioridade::ALTA;
-                } else {
-                    processo.prio = Prioridade::BAIXA;
-                }
+                // Corrigindo a lógica de prioridade para usar o valor do enum
+                //std::cout <<"here" << std::endl;
+                processo.prio =std::stoi(valor);
             }
             if (tipo == "FCFS") {
                 processo.sched = Scheduling::FCFS;
+            }
+            if (tipo == "arrival") {
+                processo.arrival_time = std::stoi(valor);
+            }
+            if(tipo == "burst") {
+                processo.burst_time = std::stoi(valor);
             }
         }
     }

@@ -12,5 +12,7 @@
 .enddata
 
 .scheduling
-  RR #1
+  RR 10
+  arrival 5
+  burst 8
 .endscheduling
