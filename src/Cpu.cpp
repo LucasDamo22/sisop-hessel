@@ -13,8 +13,8 @@ CPU::CPU() : running(nullptr), pid(0), elapsed_time(0) {}
 void CPU::boot() {
     Parser meuParser;
     processos.push_back(meuParser.parse("programs/prog1.txt"));
-    processos.push_back(meuParser.parse("programs/prog2.txt"));
-    processos.push_back(meuParser.parse("programs/prog3.txt"));
+    // processos.push_back(meuParser.parse("programs/prog2.txt"));
+    // processos.push_back(meuParser.parse("programs/prog3.txt"));
     for(size_t i = 0; i < processos.size(); i++ ){
         this->newprocess.push_back(&processos[i]);
         this->newprocess[i]->id = i;
@@ -111,7 +111,7 @@ bool CPU::executarInstrucao() {
     }
 
     Instrucao instr = this->running->codigo[this->running->pc];
-    std::cout << "Executando: Processo " << this->running->id << ", PC=" << this->running->pc << ", OpCode=" << static_cast<int>(instr.opcode) << std::endl;
+    std::cout << "Executando: Processo " << this->running->id << ", PC=" << this->running->pc << ", OpCode=" << opcode_to_string(instr.opcode) << std::endl;
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distrib(3, 5);
@@ -129,6 +129,7 @@ bool CPU::executarInstrucao() {
             case 2:
                 std::cin >> this->running->acc;
                 this->running->wait_time = elapsed_time + distrib(gen);
+                
                 break;
             default:
                 break;
