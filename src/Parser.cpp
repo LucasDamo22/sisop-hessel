@@ -52,8 +52,14 @@ void Parser::encontra_lables(std::ifstream& arquivo, std::map<std::string, int>&
     bool em_secao_codigo = false;
 
     while (std::getline(arquivo, linha)) {
-        // A LÓGICA DE REMOÇÃO DE COMENTÁRIOS FOI REMOVIDA DAQUI
+        
         linha = trim(linha);
+
+        size_t pos_comentario = linha.find("# ");
+        if (pos_comentario != std::string::npos) {
+            linha = linha.substr(0, pos_comentario);
+        }
+        std::cout<<"LINHA " << linha << std::endl;
 
         if (linha.empty()) continue;
         if (linha.rfind("#", 0) == 0) continue; // Ignora linhas que começam com #
@@ -82,7 +88,7 @@ void Parser::passo2_gerar_estruturas(std::ifstream& arquivo, Processo& processo,
     bool em_secao_escalonador = false;
 
     while (std::getline(arquivo, linha)) {
-        size_t pos_comentario = linha.find(" # ");
+        size_t pos_comentario = linha.find("# ");
         if (pos_comentario != std::string::npos) {
             linha = linha.substr(0, pos_comentario);
         }
