@@ -21,6 +21,7 @@ void CPU::boot() {
         this->newprocess.push_back(&processos[i]);
         this->newprocess[i]->id = i;
         // newprocess.back()->tostr();
+        this->newprocess[i]->estado = Estado::NEW;
     }
 }
 
@@ -43,8 +44,10 @@ void CPU::escalonador() {
             
             if(this->elapsed_time >= current->arrival_time){
                 if(current->sched == Scheduling::RR){
+                    current->estado = Estado::READY;
                     insere_realtime(current);
                 } else {
+                    current->estado = Estado::READY;
                     this->best_effort.push_back(current);
                 }
                 it = newprocess.erase(it);
@@ -61,8 +64,10 @@ void CPU::escalonador() {
             
             if(this->elapsed_time >= current->wait_time){
                 if(current->sched == Scheduling::RR){
+                    current->estado = Estado::READY;
                     insere_realtime(current);
                 } else {
+                    current->estado = Estado::READY;
                     this->best_effort.push_back(current);
                 }
                 it = waiting.erase(it);
@@ -77,21 +82,28 @@ void CPU::escalonador() {
         if(!this->real_time.empty()) {
             this->running = real_time.front(); 
             this->real_time.pop_front();
+            this->running->estado = Estado::RUNNING;
+            this->running->restante_quantum = this->running->quantum;
         } else if(!this->best_effort.empty()){
             this->running = best_effort.front();
             this->best_effort.pop_front();
+            this->running->estado = Estado::RUNNING;
         }
     } else {
         Processo *leaving = this->running;
         // so troca o processo se a fila de tempo real não estiver
         if(!this->real_time.empty()){
             if(leaving->sched == Scheduling::RR){
+                leaving->estado = Estado::READY;
                 insere_realtime(leaving);
             } else {
+                leaving->estado = Estado::READY;
                 best_effort.push_front(leaving);
             }
             this->running = real_time.front(); 
             this->real_time.pop_front();
+            this->running->estado = Estado::RUNNING;
+            this->running->restante_quantum = this->running->quantum;
         }
     }
 }
@@ -101,23 +113,13 @@ void CPU::escalonador() {
 void CPU::executar() {
     
     int next_sched_time = 0;
-
-    auto todos_finalizados = [&](){
-    bool all_exit = std::all_of(processos.begin(), processos.end(),
-        [](const Processo& p){ return p.estado == Estado::EXIT; });
-    return all_exit 
-        && running == nullptr 
-        && real_time.empty() 
-        && best_effort.empty() 
-        && waiting.empty() 
-        && newprocess.empty();
-};
-    
-    while(!todos_finalizados()){
+    while(1){
         if((elapsed_time == next_sched_time) || this->running == nullptr || (this->running->sched == Scheduling::FCFS)){
             std::cout<< "escalonador tempo " << elapsed_time << std::endl;
             escalonador();
-            next_sched_time = this->QUANTUM + elapsed_time;
+            next_sched_time = (this->running && this->running->sched == Scheduling::RR)
+                                ? (elapsed_time + this->running->restante_quantum)
+                                : (this->QUANTUM + elapsed_time);
             
         }
         std::cout<< "next sched time "<< next_sched_time << std::endl;
@@ -130,6 +132,18 @@ void CPU::executar() {
             std::cout<<"idle "<<std::endl;
         }
         executarInstrucao();
+
+        if (running && running->sched == Scheduling::RR) {
+            if (--running->restante_quantum == 0) {
+                Processo* p = running;
+                running = nullptr;
+                p->estado = Estado::READY;
+                insere_realtime(p);
+                p->restante_quantum = p->quantum;
+                next_sched_time = elapsed_time; 
+            }
+        }
+
         elapsed_time++;
         std::this_thread::sleep_for(std::chrono::milliseconds(SIM_STEP));
     }
@@ -142,6 +156,13 @@ bool CPU::executarInstrucao() {
         return false; // Retorna false para indicar que o processo terminou
     }
 
+    if (this->running->pc < 0 || this->running->pc >= (int)this->running->codigo.size()) {
+        this->running->estado = Estado::EXIT;
+        this->exit.push_back(this->running);
+        this->running = nullptr;
+        return true;
+    }
+
     Instrucao instr = this->running->codigo[this->running->pc];
     std::cout << "Executando: Processo " << this->running->id << ", PC=" << this->running->pc << ", OpCode=" << opcode_to_string(instr.opcode) << std::endl;
     std::random_device rd;
@@ -151,11 +172,12 @@ bool CPU::executarInstrucao() {
     switch (instr.opcode) {
         // ===== SYSCALL =====
         case OpCode::SYSCALL:
-            switch (std::stoi(instr.operando_str)) {
+            switch (instr.operando_val) {
             case 0: // EXIT
                 std::cout << "\n[SYSCALL 0 - EXIT] Processo " << running->id
                         << " | PC=" << running->pc << std::endl;
                 std::cout << "  Encerrando processo." << std::endl;
+                this->running->estado = Estado::EXIT;
                 this->exit.push_back(this->running);
                 this->running = nullptr;
                 break;
@@ -165,6 +187,7 @@ bool CPU::executarInstrucao() {
                         << " | PC=" << running->pc << std::endl;
                 std::cout << "  Saída (ACC)=" << this->running->acc << std::endl;
                 this->running->wait_time = elapsed_time + distrib(gen);
+                this->running->estado = Estado::WAITING;
                 waiting.push_back(this->running);
                 this->running->pc++;
                 this->running = nullptr;
@@ -175,8 +198,10 @@ bool CPU::executarInstrucao() {
                         << " | PC=" << running->pc << std::endl;
                 std::cout << "  Digite um valor: ";
                 std::cin >> this->running->acc;
+                if (this->running->acc == 101) std::cout << "Ola" << std::endl;
                 this->running->wait_time = elapsed_time + distrib(gen);
                 std::cout << "wait time" <<this->running->wait_time <<std::endl;
+                this->running->estado = Estado::WAITING;
                 waiting.push_back(this->running);
                 this->running->pc++;
                 this->running = nullptr;
