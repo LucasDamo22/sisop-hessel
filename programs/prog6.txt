@@ -25,5 +25,5 @@ fim:
 
 .scheduling
   RR 1
-  arrival 10
+  arrival 11
 .endscheduling

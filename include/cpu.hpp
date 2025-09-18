@@ -24,11 +24,11 @@ public:
     
     void boot();
     void executar();
-    void escalonador();
+    void escalonador(std::stringstream& logger);
     void spawn_proc();
     void insere_realtime(Processo *p1);
     void print_all_process();
 
 private:
-    bool executarInstrucao();
+    bool executarInstrucao(std::stringstream& logger);
 };

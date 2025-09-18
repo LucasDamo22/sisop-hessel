@@ -13,5 +13,5 @@
 
 .scheduling
   FCFS 
-  arrival 5
+  arrival 7
 .endscheduling
