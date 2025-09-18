@@ -13,8 +13,8 @@ CPU::CPU() : running(nullptr), pid(0), elapsed_time(0) {}
 void CPU::boot() {
     Parser meuParser;
     processos.push_back(meuParser.parse("programs/prog1.txt"));
-    // processos.push_back(meuParser.parse("programs/prog2.txt"));
-    // processos.push_back(meuParser.parse("programs/prog3.txt"));
+    processos.push_back(meuParser.parse("programs/prog2.txt"));
+    processos.push_back(meuParser.parse("programs/prog3.txt"));
     for(size_t i = 0; i < processos.size(); i++ ){
         this->newprocess.push_back(&processos[i]);
         this->newprocess[i]->id = i;
@@ -117,52 +117,148 @@ bool CPU::executarInstrucao() {
     std::uniform_int_distribution<> distrib(3, 5);
 
     switch (instr.opcode) {
+        // Casos já implementados por você
         case OpCode::SYSCALL:
             switch (instr.operando_val) {
             case 0:
+                std::cout << "============EXECUTANDO SYSCALL 0 (EXIT)============" << std::endl;
                 this->exit.push_back(this->running);
                 this->running = nullptr;
                 break;
             case 1:
-                std::cout << "Id " << this->running << ": " << this->running->acc <<std::endl;
+                std::cout << "============EXECUTANDO SYSCALL 1 (PRINT)===========" << std::endl;
+                std::cout << "SAIDA DO PROCESSO ID " << this->running->id << ": " << this->running->acc << std::endl;
                 break;
             case 2:
+                std::cout << "============EXECUTANDO SYSCALL 2 (READ)============" << std::endl;
+                std::cout << "Digite um valor para o processo ID " << this->running->id << ": ";
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::cin >> this->running->acc;
                 this->running->wait_time = elapsed_time + distrib(gen);
-                
                 break;
             default:
+                std::cout << "ERRO: SYSCALL com operando invalido." << std::endl;
                 break;
             }
-            break;
+            break; // Fim do SYSCALL
+
         case OpCode::ADD:
+            std::cout << "============EXECUTANDO ADD============" << std::endl;
+            if(instr.modo == ModoEnderecamento::IMEDIATO)
+                running->acc += instr.operando_val;
+            else
+                running->acc += running->dados[instr.operando_str];
+            std::cout << "Acc = " << running->acc << std::endl;
             break;
+
         case OpCode::SUB:
+            std::cout << "============EXECUTANDO SUB============" << std::endl;
+            if(instr.modo == ModoEnderecamento::IMEDIATO)
+                running->acc -= instr.operando_val;
+            else
+                running->acc -= running->dados[instr.operando_str];
+            std::cout << "Acc = " << running->acc << std::endl;
             break;
+
+        // ----- Restante das instruções implementadas abaixo -----
+
         case OpCode::MULT:
+            std::cout << "============EXECUTANDO MULT============" << std::endl;
+            if (instr.modo == ModoEnderecamento::IMEDIATO)
+                running->acc *= instr.operando_val;
+            else
+                running->acc *= running->dados[instr.operando_str];
+            std::cout << "Acc = " << running->acc << std::endl;
             break;
+
         case OpCode::DIV:
+            std::cout << "============EXECUTANDO DIV=============" << std::endl;
+            { // Bloco para criar uma variável local 'divisor'
+                int divisor = 0;
+                if (instr.modo == ModoEnderecamento::IMEDIATO) {
+                    divisor = instr.operando_val;
+                } else {
+                    divisor = running->dados[instr.operando_str];
+                }
+
+                if (divisor != 0) {
+                    running->acc /= divisor;
+                } else {
+                    std::cout << "ERRO: Tentativa de divisao por zero!" << std::endl;
+                    // Opcional: finalizar o processo por erro
+                    // this->exit.push_back(this->running);
+                    // this->running = nullptr;
+                }
+            }
+            std::cout << "Acc = " << running->acc << std::endl;
             break;
+
         case OpCode::LOAD:
+            std::cout << "============EXECUTANDO LOAD=============" << std::endl;
+            if (instr.modo == ModoEnderecamento::IMEDIATO)
+                running->acc = instr.operando_val;
+            else
+                running->acc = running->dados[instr.operando_str];
+            std::cout << "Acc = " << running->acc << std::endl;
             break;
+
         case OpCode::STORE:
+            std::cout << "============EXECUTANDO STORE============" << std::endl;
+            if (instr.modo == ModoEnderecamento::DIRETO) {
+                running->dados[instr.operando_str] = running->acc;
+                std::cout << "Memoria[" << instr.operando_str << "] = " << running->acc << std::endl;
+            } else {
+                std::cout << "ERRO: Modo de enderecamento IMEDIATO invalido para STORE." << std::endl;
+            }
             break;
+
         case OpCode::BRANY:
+            std::cout << "============EXECUTANDO BRANY============" << std::endl;
+            running->pc = instr.operando_val - 1; // -1 para compensar o pc++ no final
+            std::cout << "Salto incondicional para PC = " << instr.operando_val << std::endl;
             break;
+
         case OpCode::BRPOS:
+            std::cout << "============EXECUTANDO BRPOS============" << std::endl;
+            if (running->acc > 0) {
+                running->pc = instr.operando_val - 1;
+                std::cout << "Acc > 0. Saltando para PC = " << instr.operando_val << std::endl;
+            } else {
+                std::cout << "Acc <= 0. Nao saltou." << std::endl;
+            }
             break;
+
         case OpCode::BRZERO:
+            std::cout << "============EXECUTANDO BRZERO============" << std::endl;
+            if (running->acc == 0) {
+                running->pc = instr.operando_val - 1;
+                std::cout << "Acc == 0. Saltando para PC = " << instr.operando_val << std::endl;
+            } else {
+                std::cout << "Acc != 0. Nao saltou." << std::endl;
+            }
             break;
+
         case OpCode::BRNEG:
+            std::cout << "============EXECUTANDO BRNEG============" << std::endl;
+            if (running->acc < 0) {
+                running->pc = instr.operando_val - 1;
+                std::cout << "Acc < 0. Saltando para PC = " << instr.operando_val << std::endl;
+            } else {
+                std::cout << "Acc >= 0. Nao saltou." << std::endl;
+            }
             break;
+
         case OpCode::INVALIDO:
-            break;
-        
         default:
-            // Placeholder para outras instruções
+            std::cout << "ERRO: Instrucao invalida encontrada!" << std::endl;
+            // this->exit.push_back(this->running);
+            // this->running = nullptr;
             break;
     }
-    if(!(this->running == nullptr)){
+
+    // Incrementa o PC se o processo não terminou ou não saltou
+    if (this->running != nullptr) {
         this->running->pc++;
     }
      // Avança para a próxima instrução
