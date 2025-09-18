@@ -82,7 +82,7 @@ void Parser::passo2_gerar_estruturas(std::ifstream& arquivo, Processo& processo,
     bool em_secao_escalonador = false;
 
     while (std::getline(arquivo, linha)) {
-        size_t pos_comentario = linha.find(" #");
+        size_t pos_comentario = linha.find(" # ");
         if (pos_comentario != std::string::npos) {
             linha = linha.substr(0, pos_comentario);
         }

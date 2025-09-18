@@ -1,6 +1,6 @@
 .code
   load controle		# acc <- 0
-  syscall 2		# digitar numer 1: acc<- 1
+  syscall 2		# digitar numer 1 acc<- 1
   store controle	# pmem[controle] <- 1
 loop:
   BRZERO fim		# 2a. Volta sai

@@ -11,7 +11,7 @@ int main() {
     
     meuSistema.boot();
     meuSistema.print_all_process();
-    meuSistema.executar();
+    // meuSistema.executar();
 
     return 0;
 }

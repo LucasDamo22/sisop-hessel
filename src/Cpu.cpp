@@ -12,9 +12,9 @@ CPU::CPU() : running(nullptr), pid(0), elapsed_time(0) {}
 
 void CPU::boot() {
     Parser meuParser;
-    processos.push_back(meuParser.parse("programs/prog1.txt"));
+    // processos.push_back(meuParser.parse("programs/prog1.txt"));
     // processos.push_back(meuParser.parse("programs/prog2.txt"));
-    // processos.push_back(meuParser.parse("programs/prog3.txt"));
+    processos.push_back(meuParser.parse("programs/prog3.txt"));
     for(size_t i = 0; i < processos.size(); i++ ){
         this->newprocess.push_back(&processos[i]);
         this->newprocess[i]->id = i;
