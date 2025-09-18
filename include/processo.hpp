@@ -43,23 +43,18 @@ std::string scheduling_to_string(Scheduling s);
 std::string estado_to_string(Estado e);
 std::string opcode_to_string(OpCode op);
 
-class Processo {
-public:
-    int id;
-    int pc;
-    int acc;
-    int arrival_time;
-    int prio;
-    int wait_time;
-    Scheduling sched;
-    Estado estado;
-    
+struct Processo {
+    int id = -1;
+    int pc = 0;
+    int acc = 0;
+    Scheduling sched = Scheduling::FCFS;
+    int prio = 1;
+    int quantum = 1;
+    int restante_quantum = 1;
+    int arrival_time = 0;
+    int wait_time = -1;
+    Estado estado = Estado::NEW;
     std::vector<Instrucao> codigo;
-    std::map<std::string, int> dados;
-
-    void tostr() const;
-    void imprimir_instrucao(size_t endereco) const;
-
-
-    Processo() : id(0), pc(0), acc(0), wait_time(0), sched(Scheduling::FCFS), estado(Estado::NEW), prio(0x7fffffff) {}
+    std::map<std::string,int> dados;
+    Processo() : id(-1), pc(0), acc(0), sched(Scheduling::FCFS), estado(Estado::NEW),prio(1), quantum(1), restante_quantum(1), arrival_time(0), wait_time(-1) {}
 };
