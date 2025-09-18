@@ -15,7 +15,7 @@ public:
     std::deque<Processo*> real_time;
     std::deque<Processo*> best_effort;
     std::vector<Processo*> newprocess;
-    std::vector<Processo*> waiting;
+    std::deque<Processo*> waiting;
     std::vector<Processo*> exit;
     Processo* running;
     

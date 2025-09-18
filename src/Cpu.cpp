@@ -5,7 +5,9 @@
 #include <thread> 
 #include <algorithm>
 #include <random>
-#define SIM_STEP 500
+#define SIM_STEP 1000
+
+// using namespace std::cout, std::endl;
 
 
 CPU::CPU() : running(nullptr), pid(0), elapsed_time(0) {}
@@ -13,8 +15,8 @@ CPU::CPU() : running(nullptr), pid(0), elapsed_time(0) {}
 void CPU::boot() {
     Parser meuParser;
     processos.push_back(meuParser.parse("programs/prog1.txt"));
-    // processos.push_back(meuParser.parse("programs/prog2.txt"));
-    // processos.push_back(meuParser.parse("programs/prog3.txt"));
+    processos.push_back(meuParser.parse("programs/prog2.txt"));
+    processos.push_back(meuParser.parse("programs/prog3.txt"));
     for(size_t i = 0; i < processos.size(); i++ ){
         this->newprocess.push_back(&processos[i]);
         this->newprocess[i]->id = i;
@@ -46,6 +48,24 @@ void CPU::escalonador() {
                     this->best_effort.push_back(current);
                 }
                 it = newprocess.erase(it);
+            }else{
+                it++;
+            }
+        }
+    }
+    std::cout << "wait queue size "<< waiting.size() << std::endl;
+    if(!waiting.empty()) {
+        for(auto it = waiting.begin(); it != waiting.end();) {
+            Processo *current = *it;
+            std::cout << "wait id "<<current->id << std::endl;
+            
+            if(this->elapsed_time >= current->wait_time){
+                if(current->sched == Scheduling::RR){
+                    insere_realtime(current);
+                } else {
+                    this->best_effort.push_back(current);
+                }
+                it = waiting.erase(it);
             }else{
                 it++;
             }
@@ -119,7 +139,7 @@ bool CPU::executarInstrucao() {
     switch (instr.opcode) {
         // ===== SYSCALL =====
         case OpCode::SYSCALL:
-            switch (instr.operando_val) {
+            switch (std::stoi(instr.operando_str)) {
             case 0: // EXIT
                 std::cout << "\n[SYSCALL 0 - EXIT] Processo " << running->id
                         << " | PC=" << running->pc << std::endl;
@@ -132,17 +152,22 @@ bool CPU::executarInstrucao() {
                 std::cout << "\n[SYSCALL 1 - PRINT] Processo " << running->id
                         << " | PC=" << running->pc << std::endl;
                 std::cout << "  Saída (ACC)=" << this->running->acc << std::endl;
+                this->running->wait_time = elapsed_time + distrib(gen);
+                waiting.push_back(this->running);
+                this->running->pc++;
+                this->running = nullptr;
                 break;
 
             case 2: // READ
                 std::cout << "\n[SYSCALL 2 - READ] Processo " << running->id
                         << " | PC=" << running->pc << std::endl;
                 std::cout << "  Digite um valor: ";
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::cin >> this->running->acc;
-                std::cout << "  Valor lido em ACC=" << this->running->acc << std::endl;
                 this->running->wait_time = elapsed_time + distrib(gen);
+                std::cout << "wait time" <<this->running->wait_time <<std::endl;
+                waiting.push_back(this->running);
+                this->running->pc++;
+                this->running = nullptr;
                 break;
 
             default:
