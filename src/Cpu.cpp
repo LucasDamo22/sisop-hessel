@@ -101,7 +101,19 @@ void CPU::escalonador() {
 void CPU::executar() {
     
     int next_sched_time = 0;
-    while(1){
+    
+    auto todos_finalizados = [&](){
+    bool all_exit = std::all_of(processos.begin(), processos.end(),
+        [](const Processo& p){ return p.estado == Estado::EXIT; });
+    return all_exit 
+        && running == nullptr 
+        && real_time.empty() 
+        && best_effort.empty() 
+        && waiting.empty() 
+        && newprocess.empty();
+};
+    
+    while(!todos_finalizados()){
         if((elapsed_time == next_sched_time) || this->running == nullptr || (this->running->sched == Scheduling::FCFS)){
             std::cout<< "escalonador tempo " << elapsed_time << std::endl;
             escalonador();
