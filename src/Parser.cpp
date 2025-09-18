@@ -105,7 +105,6 @@ void Parser::cria_estrutura(std::ifstream& arquivo, Processo& processo, const st
         if (linha == ".endscheduling") { em_secao_escalonador = false; continue; }
 
         if (em_secao_codigo) {
-            // Agora, esta busca por ':' é segura, pois a parte do comentário já foi removida.
             size_t pos_label = linha.find(':');
             if (pos_label != std::string::npos) {
                 linha = trim(linha.substr(pos_label + 1));
@@ -151,7 +150,6 @@ void Parser::cria_estrutura(std::ifstream& arquivo, Processo& processo, const st
 
             if (tipo == "RR") { 
                 processo.sched = Scheduling::RR;
-                // Corrigindo a lógica de prioridade para usar o valor do enum
                 //std::cout <<"here" << std::endl;
                 processo.prio =std::stoi(valor);
             }
