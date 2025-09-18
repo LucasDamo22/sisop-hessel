@@ -30,6 +30,7 @@ public:
     void escalonador();
     void spawn_proc();
     void insere_realtime(Processo *p1);
+    void print_all_process();
 
 private:
     // Método auxiliar privado para executar uma única instrução

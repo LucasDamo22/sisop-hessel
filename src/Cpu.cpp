@@ -13,8 +13,8 @@ CPU::CPU() : running(nullptr), pid(0), elapsed_time(0) {}
 void CPU::boot() {
     Parser meuParser;
     processos.push_back(meuParser.parse("programs/prog1.txt"));
-    processos.push_back(meuParser.parse("programs/prog2.txt"));
-    processos.push_back(meuParser.parse("programs/prog3.txt"));
+    // processos.push_back(meuParser.parse("programs/prog2.txt"));
+    // processos.push_back(meuParser.parse("programs/prog3.txt"));
     for(size_t i = 0; i < processos.size(); i++ ){
         this->newprocess.push_back(&processos[i]);
         this->newprocess[i]->id = i;
@@ -117,145 +117,195 @@ bool CPU::executarInstrucao() {
     std::uniform_int_distribution<> distrib(3, 5);
 
     switch (instr.opcode) {
-        // Casos já implementados por você
+        // ===== SYSCALL =====
         case OpCode::SYSCALL:
             switch (instr.operando_val) {
-            case 0:
-                std::cout << "============EXECUTANDO SYSCALL 0 (EXIT)============" << std::endl;
+            case 0: // EXIT
+                std::cout << "\n[SYSCALL 0 - EXIT] Processo " << running->id
+                        << " | PC=" << running->pc << std::endl;
+                std::cout << "  Encerrando processo." << std::endl;
                 this->exit.push_back(this->running);
                 this->running = nullptr;
                 break;
-            case 1:
-                std::cout << "============EXECUTANDO SYSCALL 1 (PRINT)===========" << std::endl;
-                std::cout << "SAIDA DO PROCESSO ID " << this->running->id << ": " << this->running->acc << std::endl;
+
+            case 1: // PRINT
+                std::cout << "\n[SYSCALL 1 - PRINT] Processo " << running->id
+                        << " | PC=" << running->pc << std::endl;
+                std::cout << "  Saída (ACC)=" << this->running->acc << std::endl;
                 break;
-            case 2:
-                std::cout << "============EXECUTANDO SYSCALL 2 (READ)============" << std::endl;
-                std::cout << "Digite um valor para o processo ID " << this->running->id << ": ";
+
+            case 2: // READ
+                std::cout << "\n[SYSCALL 2 - READ] Processo " << running->id
+                        << " | PC=" << running->pc << std::endl;
+                std::cout << "  Digite um valor: ";
                 std::cin.clear();
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::cin >> this->running->acc;
+                std::cout << "  Valor lido em ACC=" << this->running->acc << std::endl;
                 this->running->wait_time = elapsed_time + distrib(gen);
                 break;
+
             default:
-                std::cout << "ERRO: SYSCALL com operando invalido." << std::endl;
+                std::cout << "\n[SYSCALL] ERRO: Operando inválido (" 
+                        << instr.operando_val << ")" << std::endl;
                 break;
             }
-            break; // Fim do SYSCALL
+            break;
 
+        // ===== ADD =====
         case OpCode::ADD:
-            std::cout << "============EXECUTANDO ADD============" << std::endl;
-            if(instr.modo == ModoEnderecamento::IMEDIATO)
+            std::cout << "\n[ADD] Processo " << running->id 
+                    << " | PC=" << running->pc 
+                    << " | ACC antes=" << running->acc << std::endl;
+            if(instr.modo == ModoEnderecamento::IMEDIATO) {
+                std::cout << "  Somando imediato " << instr.operando_val << std::endl;
                 running->acc += instr.operando_val;
-            else
+            } else {
+                std::cout << "  Somando memória[" << instr.operando_str << "]="
+                        << running->dados[instr.operando_str] << std::endl;
                 running->acc += running->dados[instr.operando_str];
-            std::cout << "Acc = " << running->acc << std::endl;
+            }
+            std::cout << "  ACC depois=" << running->acc << std::endl;
             break;
 
+        // ===== SUB =====
         case OpCode::SUB:
-            std::cout << "============EXECUTANDO SUB============" << std::endl;
-            if(instr.modo == ModoEnderecamento::IMEDIATO)
+            std::cout << "\n[SUB] Processo " << running->id 
+                    << " | PC=" << running->pc 
+                    << " | ACC antes=" << running->acc << std::endl;
+            if(instr.modo == ModoEnderecamento::IMEDIATO) {
+                std::cout << "  Subtraindo imediato " << instr.operando_val << std::endl;
                 running->acc -= instr.operando_val;
-            else
+            } else {
+                std::cout << "  Subtraindo memória[" << instr.operando_str << "]="
+                        << running->dados[instr.operando_str] << std::endl;
                 running->acc -= running->dados[instr.operando_str];
-            std::cout << "Acc = " << running->acc << std::endl;
+            }
+            std::cout << "  ACC depois=" << running->acc << std::endl;
             break;
 
-        // ----- Restante das instruções implementadas abaixo -----
-
+        // ===== MULT =====
         case OpCode::MULT:
-            std::cout << "============EXECUTANDO MULT============" << std::endl;
-            if (instr.modo == ModoEnderecamento::IMEDIATO)
+            std::cout << "\n[MULT] Processo " << running->id 
+                    << " | PC=" << running->pc 
+                    << " | ACC antes=" << running->acc << std::endl;
+            if(instr.modo == ModoEnderecamento::IMEDIATO) {
+                std::cout << "  Multiplicando por imediato " << instr.operando_val << std::endl;
                 running->acc *= instr.operando_val;
-            else
+            } else {
+                std::cout << "  Multiplicando por memória[" << instr.operando_str << "]="
+                        << running->dados[instr.operando_str] << std::endl;
                 running->acc *= running->dados[instr.operando_str];
-            std::cout << "Acc = " << running->acc << std::endl;
+            }
+            std::cout << "  ACC depois=" << running->acc << std::endl;
             break;
 
+        // ===== DIV =====
         case OpCode::DIV:
-            std::cout << "============EXECUTANDO DIV=============" << std::endl;
-            { // Bloco para criar uma variável local 'divisor'
-                int divisor = 0;
-                if (instr.modo == ModoEnderecamento::IMEDIATO) {
-                    divisor = instr.operando_val;
-                } else {
-                    divisor = running->dados[instr.operando_str];
-                }
+            std::cout << "\n[DIV] Processo " << running->id 
+                    << " | PC=" << running->pc 
+                    << " | ACC antes=" << running->acc << std::endl;
+            {
+                int divisor = (instr.modo == ModoEnderecamento::IMEDIATO)
+                    ? instr.operando_val
+                    : running->dados[instr.operando_str];
+
+                std::cout << "  Divisor=" << divisor << std::endl;
 
                 if (divisor != 0) {
                     running->acc /= divisor;
+                    std::cout << "  ACC depois=" << running->acc << std::endl;
                 } else {
-                    std::cout << "ERRO: Tentativa de divisao por zero!" << std::endl;
-                    // Opcional: finalizar o processo por erro
-                    // this->exit.push_back(this->running);
-                    // this->running = nullptr;
+                    std::cout << "  ERRO: divisão por zero!" << std::endl;
                 }
             }
-            std::cout << "Acc = " << running->acc << std::endl;
             break;
 
+        // ===== LOAD =====
         case OpCode::LOAD:
-            std::cout << "============EXECUTANDO LOAD=============" << std::endl;
-            if (instr.modo == ModoEnderecamento::IMEDIATO)
+            std::cout << "\n[LOAD] Processo " << running->id 
+                    << " | PC=" << running->pc << std::endl;
+            if (instr.modo == ModoEnderecamento::IMEDIATO) {
+                std::cout << "  Carregando imediato " << instr.operando_val << " em ACC" << std::endl;
                 running->acc = instr.operando_val;
-            else
+            } else {
+                std::cout << "  Carregando memória[" << instr.operando_str << "]="
+                        << running->dados[instr.operando_str] << " em ACC" << std::endl;
                 running->acc = running->dados[instr.operando_str];
-            std::cout << "Acc = " << running->acc << std::endl;
+            }
+            std::cout << "  ACC depois=" << running->acc << std::endl;
             break;
 
+        // ===== STORE =====
         case OpCode::STORE:
-            std::cout << "============EXECUTANDO STORE============" << std::endl;
+            std::cout << "\n[STORE] Processo " << running->id 
+                    << " | PC=" << running->pc 
+                    << " | ACC=" << running->acc << std::endl;
             if (instr.modo == ModoEnderecamento::DIRETO) {
                 running->dados[instr.operando_str] = running->acc;
-                std::cout << "Memoria[" << instr.operando_str << "] = " << running->acc << std::endl;
+                std::cout << "  Memória[" << instr.operando_str << "]="
+                        << running->acc << std::endl;
             } else {
-                std::cout << "ERRO: Modo de enderecamento IMEDIATO invalido para STORE." << std::endl;
+                std::cout << "  ERRO: STORE só aceita endereçamento DIRETO" << std::endl;
             }
             break;
 
+        // ===== BRANY =====
         case OpCode::BRANY:
-            std::cout << "============EXECUTANDO BRANY============" << std::endl;
-            running->pc = instr.operando_val - 1; // -1 para compensar o pc++ no final
-            std::cout << "Salto incondicional para PC = " << instr.operando_val << std::endl;
+            std::cout << "\n[BRANY] Processo " << running->id 
+                    << " | PC atual=" << running->pc << std::endl;
+            running->pc = instr.operando_val - 1;
+            std::cout << "  Salto incondicional para PC=" << instr.operando_val << std::endl;
             break;
 
+        // ===== BRPOS =====
         case OpCode::BRPOS:
-            std::cout << "============EXECUTANDO BRPOS============" << std::endl;
+            std::cout << "\n[BRPOS] Processo " << running->id 
+                    << " | PC atual=" << running->pc 
+                    << " | ACC=" << running->acc << std::endl;
             if (running->acc > 0) {
                 running->pc = instr.operando_val - 1;
-                std::cout << "Acc > 0. Saltando para PC = " << instr.operando_val << std::endl;
+                std::cout << "  ACC > 0 → salto para PC=" << instr.operando_val << std::endl;
             } else {
-                std::cout << "Acc <= 0. Nao saltou." << std::endl;
+                std::cout << "  ACC <= 0 → não saltou" << std::endl;
             }
             break;
 
+        // ===== BRZERO =====
         case OpCode::BRZERO:
-            std::cout << "============EXECUTANDO BRZERO============" << std::endl;
+            std::cout << "\n[BRZERO] Processo " << running->id 
+                    << " | PC atual=" << running->pc 
+                    << " | ACC=" << running->acc << std::endl;
             if (running->acc == 0) {
                 running->pc = instr.operando_val - 1;
-                std::cout << "Acc == 0. Saltando para PC = " << instr.operando_val << std::endl;
+                std::cout << "  ACC == 0 → salto para PC=" << instr.operando_val << std::endl;
             } else {
-                std::cout << "Acc != 0. Nao saltou." << std::endl;
+                std::cout << "  ACC != 0 → não saltou" << std::endl;
             }
             break;
 
+        // ===== BRNEG =====
         case OpCode::BRNEG:
-            std::cout << "============EXECUTANDO BRNEG============" << std::endl;
+            std::cout << "\n[BRNEG] Processo " << running->id 
+                    << " | PC atual=" << running->pc 
+                    << " | ACC=" << running->acc << std::endl;
             if (running->acc < 0) {
                 running->pc = instr.operando_val - 1;
-                std::cout << "Acc < 0. Saltando para PC = " << instr.operando_val << std::endl;
+                std::cout << "  ACC < 0 → salto para PC=" << instr.operando_val << std::endl;
             } else {
-                std::cout << "Acc >= 0. Nao saltou." << std::endl;
+                std::cout << "  ACC >= 0 → não saltou" << std::endl;
             }
             break;
 
+        // ===== INVALIDO =====
         case OpCode::INVALIDO:
         default:
-            std::cout << "ERRO: Instrucao invalida encontrada!" << std::endl;
-            // this->exit.push_back(this->running);
-            // this->running = nullptr;
+            std::cout << "\n[ERRO] Processo " << running->id 
+                    << " | PC=" << running->pc 
+                    << " → instrução inválida!" << std::endl;
             break;
     }
+
 
     // Incrementa o PC se o processo não terminou ou não saltou
     if (this->running != nullptr) {
@@ -263,4 +313,10 @@ bool CPU::executarInstrucao() {
     }
      // Avança para a próxima instrução
     return true; // Retorna true para indicar que o processo continua
+}
+
+void CPU::print_all_process(){
+    for(int i = 0; i < processos.size(); i++){
+        processos[i].tostr();
+    }
 }
