@@ -29,7 +29,7 @@ fim:
 .enddata
 
 .scheduling
-  RR 9
+  RR 0
   arrival 5
 .endscheduling
 

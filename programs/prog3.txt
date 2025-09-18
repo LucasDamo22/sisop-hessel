@@ -31,6 +31,6 @@ fim:
 .enddata
 
 .scheduling
-  FCFS
+  RR 0
   arrival 2
 .endscheduling

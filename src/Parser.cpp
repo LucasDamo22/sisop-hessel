@@ -17,7 +17,7 @@ Processo Parser::parse(const std::string& nome_arquivo) {
     encontra_lables(arquivo, tabelaDeLabels);
     arquivo.clear();
     arquivo.seekg(0, std::ios::beg);
-    passo2_gerar_estruturas(arquivo, processo, tabelaDeLabels);
+    cria_estrutura(arquivo, processo, tabelaDeLabels);
 
     return processo;
 }
@@ -59,7 +59,6 @@ void Parser::encontra_lables(std::ifstream& arquivo, std::map<std::string, int>&
         if (pos_comentario != std::string::npos) {
             linha = linha.substr(0, pos_comentario);
         }
-        std::cout<<"LINHA " << linha << std::endl;
 
         if (linha.empty()) continue;
         if (linha.rfind("#", 0) == 0) continue; // Ignora linhas que começam com #
@@ -81,7 +80,7 @@ void Parser::encontra_lables(std::ifstream& arquivo, std::map<std::string, int>&
     }
 }
 
-void Parser::passo2_gerar_estruturas(std::ifstream& arquivo, Processo& processo, const std::map<std::string, int>& tabelaDeLabels) {
+void Parser::cria_estrutura(std::ifstream& arquivo, Processo& processo, const std::map<std::string, int>& tabelaDeLabels) {
     std::string linha;
     bool em_secao_codigo = false;
     bool em_secao_dados = false;

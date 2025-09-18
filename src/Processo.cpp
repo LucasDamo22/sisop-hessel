@@ -57,9 +57,9 @@ void Processo::imprimir_instrucao(size_t endereco) const {
 
 
 void Processo::tostr() const {
-    std::cout << "--- Detalhes do Processo ID: " << this->id << " ---" << std::endl;
+    std::cout << "=========================================================================" << std::endl;
+    std::cout << "PID: " << this->id << std::endl;
     std::cout << "Escalonamento: " << scheduling_to_string(this->sched) << std::endl;
-    std::cout << "Estado: " << estado_to_string(this->estado) << std::endl;
     std::cout << "Prioridade: " << this->prio << std::endl;
     std::cout << "Arrival: " << this->arrival_time << std::endl;
     std::cout << "Wait: " << this->wait_time << std::endl;
@@ -73,4 +73,5 @@ void Processo::tostr() const {
     for (const auto& par : dados) {
         std::cout << "Variavel '" << par.first << "' = " << par.second << std::endl;
     }
+    std::cout << "=========================================================================" << std::endl;
 }

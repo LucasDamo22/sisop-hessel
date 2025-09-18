@@ -12,6 +12,6 @@
 .enddata
 
 .scheduling
-  RR 9
+  FCFS 
   arrival 5
 .endscheduling

@@ -1,30 +1,29 @@
 .code
-load a          # acc <- 10 (carrega o primeiro número)
-sub b           # acc <- 10 - 7 = 3 (subtrai o segundo)
-# O resultado no acc nos diz a relação entre a e b
-
-BRZERO eh_igual # Se acc for 0, então a == b, desvia
-BRNEG eh_menor  # Se acc for negativo, então a < b, desvia
-
+    load a          # acc <- 10 (carrega o primeiro número)
+    sub b           # acc <- 10 - 7 = 3 (subtrai o segundo)
+    BRZERO eh_igual # Se acc for 0, então a == b, desvia
+    BRNEG eh_menor  # Se acc for negativo, então a < b, desvia
 eh_maior:
-load #1         # Se não desviou, a > b. Carrega 1
-syscall 1       # Imprime 1
-BRANY fim       # Pula para o final
-
+    load #1         # Se não desviou, a > b. Carrega 1
+    syscall 1       # Imprime 1
+    BRANY fim       # Pula para o final
 eh_menor:
-load #-1        # Carrega -1 para indicar a < b
-syscall 1       # Imprime -1
-BRANY fim       # Pula para o final
-
+    load #-1        # Carrega -1 para indicar a < b
+    syscall 1       # Imprime -1
+    BRANY fim       # Pula para o final
 eh_igual:
-load #0         # Carrega 0 para indicar a == b
-syscall 1       # Imprime 0
-
+    load #0         # Carrega 0 para indicar a == b
+    syscall 1       # Imprime 0
 fim:
-syscall 0       # Finaliza o programa
+    syscall 0       # Finaliza o programa
 .endcode
 
 .data
-a 10
-b 7
+    a 10
+    b 7
 .enddata
+
+.scheduling
+  RR 1
+  arrival 10
+.endscheduling

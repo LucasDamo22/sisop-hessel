@@ -17,6 +17,7 @@ HEADER_FILES := $(wildcard $(HEADERDIR)/*.hpp)
 #compiler an instance of the simulator
 $(OUTPUTDIR)/$(PROGRAM_NAME): $(SOURCE_FILES) $(HEADER_FILES)
 	g++ $(SOURCE_FILES) -o $(OUTPUTDIR)/$(PROGRAM_NAME) $(LD_FLAGS) $(CXXFLAGS)
+	./bin/main | tee output_file.txt
 
 #remove previously generated files
 clean:

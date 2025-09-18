@@ -1,0 +1,1483 @@
+
+==============================  BOOT DO OS  ==============================
+Criando Processo 1...
+Criando Processo 2...
+Criando Processo 3...
+Criando Processo 4...
+Criando Processo 5...
+Criando Processo 6...
+
+==========================  PROCESSOS CRIADOS:  =========================
+=========================================================================
+PID: 0
+Escalonamento: FCFS
+Prioridade: 2147483647
+Arrival: 5
+Wait: 0
+
+[SEGMENTO DE CODIGO]
+Endereco 0: OpCode(LOAD), OperandoStr(a), OperandoVal(0), Modo(DIRETO)
+Endereco 1: OpCode(ADD), OperandoStr(#1), OperandoVal(1), Modo(IMEDIATO)
+Endereco 2: OpCode(SUB), OperandoStr(#2), OperandoVal(2), Modo(IMEDIATO)
+Endereco 3: OpCode(SYSCALL), OperandoStr(1), OperandoVal(0), Modo(DIRETO)
+Endereco 4: OpCode(STORE), OperandoStr(a), OperandoVal(0), Modo(DIRETO)
+Endereco 5: OpCode(SYSCALL), OperandoStr(0), OperandoVal(0), Modo(DIRETO)
+
+[SEGMENTO DE DADOS]
+Variavel 'a' = 10
+=========================================================================
+=========================================================================
+PID: 1
+Escalonamento: RR
+Prioridade: 0
+Arrival: 5
+Wait: 0
+
+[SEGMENTO DE CODIGO]
+Endereco 0: OpCode(LOAD), OperandoStr(controle), OperandoVal(0), Modo(DIRETO)
+Endereco 1: OpCode(SYSCALL), OperandoStr(2), OperandoVal(0), Modo(DIRETO)
+Endereco 2: OpCode(STORE), OperandoStr(controle), OperandoVal(0), Modo(DIRETO)
+Endereco 3: OpCode(BRZERO), OperandoStr(fim), OperandoVal(15), Modo(DIRETO)
+Endereco 4: OpCode(LOAD), OperandoStr(a), OperandoVal(0), Modo(DIRETO)
+Endereco 5: OpCode(ADD), OperandoStr(b), OperandoVal(0), Modo(DIRETO)
+Endereco 6: OpCode(STORE), OperandoStr(aux), OperandoVal(0), Modo(DIRETO)
+Endereco 7: OpCode(LOAD), OperandoStr(b), OperandoVal(0), Modo(DIRETO)
+Endereco 8: OpCode(STORE), OperandoStr(a), OperandoVal(0), Modo(DIRETO)
+Endereco 9: OpCode(LOAD), OperandoStr(aux), OperandoVal(0), Modo(DIRETO)
+Endereco 10: OpCode(STORE), OperandoStr(b), OperandoVal(0), Modo(DIRETO)
+Endereco 11: OpCode(LOAD), OperandoStr(controle), OperandoVal(0), Modo(DIRETO)
+Endereco 12: OpCode(SUB), OperandoStr(#1), OperandoVal(1), Modo(IMEDIATO)
+Endereco 13: OpCode(STORE), OperandoStr(controle), OperandoVal(0), Modo(DIRETO)
+Endereco 14: OpCode(BRANY), OperandoStr(loop), OperandoVal(3), Modo(DIRETO)
+Endereco 15: OpCode(LOAD), OperandoStr(b), OperandoVal(0), Modo(DIRETO)
+Endereco 16: OpCode(SYSCALL), OperandoStr(1), OperandoVal(0), Modo(DIRETO)
+Endereco 17: OpCode(SYSCALL), OperandoStr(0), OperandoVal(0), Modo(DIRETO)
+
+[SEGMENTO DE DADOS]
+Variavel 'a' = 0
+Variavel 'aux' = 0
+Variavel 'b' = 1
+Variavel 'controle' = 0
+=========================================================================
+=========================================================================
+PID: 2
+Escalonamento: RR
+Prioridade: 0
+Arrival: 2
+Wait: 0
+
+[SEGMENTO DE CODIGO]
+Endereco 0: OpCode(SYSCALL), OperandoStr(2), OperandoVal(0), Modo(DIRETO)
+Endereco 1: OpCode(STORE), OperandoStr(numero), OperandoVal(0), Modo(DIRETO)
+Endereco 2: OpCode(SUB), OperandoStr(controle), OperandoVal(0), Modo(DIRETO)
+Endereco 3: OpCode(BRZERO), OperandoStr(fim), OperandoVal(16), Modo(DIRETO)
+Endereco 4: OpCode(LOAD), OperandoStr(numero), OperandoVal(0), Modo(DIRETO)
+Endereco 5: OpCode(DIV), OperandoStr(controle), OperandoVal(0), Modo(DIRETO)
+Endereco 6: OpCode(ADD), OperandoStr(b), OperandoVal(0), Modo(DIRETO)
+Endereco 7: OpCode(STORE), OperandoStr(aux), OperandoVal(0), Modo(DIRETO)
+Endereco 8: OpCode(LOAD), OperandoStr(b), OperandoVal(0), Modo(DIRETO)
+Endereco 9: OpCode(STORE), OperandoStr(a), OperandoVal(0), Modo(DIRETO)
+Endereco 10: OpCode(LOAD), OperandoStr(aux), OperandoVal(0), Modo(DIRETO)
+Endereco 11: OpCode(STORE), OperandoStr(b), OperandoVal(0), Modo(DIRETO)
+Endereco 12: OpCode(LOAD), OperandoStr(controle), OperandoVal(0), Modo(DIRETO)
+Endereco 13: OpCode(SUB), OperandoStr(#1), OperandoVal(1), Modo(IMEDIATO)
+Endereco 14: OpCode(STORE), OperandoStr(controle), OperandoVal(0), Modo(DIRETO)
+Endereco 15: OpCode(BRANY), OperandoStr(loop), OperandoVal(2), Modo(DIRETO)
+Endereco 16: OpCode(LOAD), OperandoStr(b), OperandoVal(0), Modo(DIRETO)
+Endereco 17: OpCode(SYSCALL), OperandoStr(1), OperandoVal(0), Modo(DIRETO)
+Endereco 18: OpCode(SYSCALL), OperandoStr(0), OperandoVal(0), Modo(DIRETO)
+
+[SEGMENTO DE DADOS]
+Variavel 'a' = 0
+Variavel 'aux' = 0
+Variavel 'b' = 3
+Variavel 'controle' = 2
+Variavel 'numero' = 0
+=========================================================================
+=========================================================================
+PID: 3
+Escalonamento: FCFS
+Prioridade: 2147483647
+Arrival: 10
+Wait: 0
+
+[SEGMENTO DE CODIGO]
+Endereco 0: OpCode(LOAD), OperandoStr(base), OperandoVal(0), Modo(DIRETO)
+Endereco 1: OpCode(MULT), OperandoStr(altura), OperandoVal(0), Modo(DIRETO)
+Endereco 2: OpCode(STORE), OperandoStr(area), OperandoVal(0), Modo(DIRETO)
+Endereco 3: OpCode(SYSCALL), OperandoStr(1), OperandoVal(0), Modo(DIRETO)
+Endereco 4: OpCode(SYSCALL), OperandoStr(0), OperandoVal(0), Modo(DIRETO)
+
+[SEGMENTO DE DADOS]
+Variavel 'altura' = 8
+Variavel 'area' = 0
+Variavel 'base' = 5
+=========================================================================
+=========================================================================
+PID: 4
+Escalonamento: FCFS
+Prioridade: 2147483647
+Arrival: 1
+Wait: 0
+
+[SEGMENTO DE CODIGO]
+Endereco 0: OpCode(LOAD), OperandoStr(numero), OperandoVal(0), Modo(DIRETO)
+Endereco 1: OpCode(BRNEG), OperandoStr(fim), OperandoVal(5), Modo(DIRETO)
+Endereco 2: OpCode(BRZERO), OperandoStr(fim), OperandoVal(5), Modo(DIRETO)
+Endereco 3: OpCode(LOAD), OperandoStr(#1), OperandoVal(1), Modo(IMEDIATO)
+Endereco 4: OpCode(SYSCALL), OperandoStr(1), OperandoVal(0), Modo(DIRETO)
+Endereco 5: OpCode(SYSCALL), OperandoStr(0), OperandoVal(0), Modo(DIRETO)
+
+[SEGMENTO DE DADOS]
+Variavel 'numero' = 15
+=========================================================================
+=========================================================================
+PID: 5
+Escalonamento: RR
+Prioridade: 1
+Arrival: 10
+Wait: 0
+
+[SEGMENTO DE CODIGO]
+Endereco 0: OpCode(LOAD), OperandoStr(a), OperandoVal(0), Modo(DIRETO)
+Endereco 1: OpCode(SUB), OperandoStr(b), OperandoVal(0), Modo(DIRETO)
+Endereco 2: OpCode(BRZERO), OperandoStr(eh_igual), OperandoVal(10), Modo(DIRETO)
+Endereco 3: OpCode(BRNEG), OperandoStr(eh_menor), OperandoVal(7), Modo(DIRETO)
+Endereco 4: OpCode(LOAD), OperandoStr(#1), OperandoVal(1), Modo(IMEDIATO)
+Endereco 5: OpCode(SYSCALL), OperandoStr(1), OperandoVal(0), Modo(DIRETO)
+Endereco 6: OpCode(BRANY), OperandoStr(fim), OperandoVal(12), Modo(DIRETO)
+Endereco 7: OpCode(LOAD), OperandoStr(#-1), OperandoVal(-1), Modo(IMEDIATO)
+Endereco 8: OpCode(SYSCALL), OperandoStr(1), OperandoVal(0), Modo(DIRETO)
+Endereco 9: OpCode(BRANY), OperandoStr(fim), OperandoVal(12), Modo(DIRETO)
+Endereco 10: OpCode(LOAD), OperandoStr(#0), OperandoVal(0), Modo(IMEDIATO)
+Endereco 11: OpCode(SYSCALL), OperandoStr(1), OperandoVal(0), Modo(DIRETO)
+Endereco 12: OpCode(SYSCALL), OperandoStr(0), OperandoVal(0), Modo(DIRETO)
+
+[SEGMENTO DE DADOS]
+Variavel 'a' = 10
+Variavel 'b' = 7
+=========================================================================
+
+===========================   EXECUTANDO OS   ===========================
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 0
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 1
+--- Processo em execucao: 4
+--- Sched: FCFS
+
+[LOAD] Processo: 4    PC = 0  Carregando memória[numero] = 15 em ACC
+  ACC depois = 15
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 2
+--- Processo em execucao: 2
+--- Sched: RR
+
+[SYSCALL 2 - READ] Processo:2
+  Digite um valor: 
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 3
+--- Processo em execucao: 4
+--- Sched: FCFS
+
+[BRNEG] Processo 4    PC = 1    ACC antes = 15
+  ACC >= 0, não saltou
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 4
+--- Processo em execucao: 4
+--- Sched: FCFS
+
+[BRZERO] Processo 4    PC = 2    ACC antes = 15
+  ACC != 0, não saltou
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 5
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 0  Carregando memória[controle] = 0 em ACC
+  ACC depois = 0
+
+--- Elapsed Time: 6
+--- Processo em execucao: 1
+--- Sched: RR
+
+[SYSCALL 2 - READ] Processo:1
+  Digite um valor: 
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 7
+--- Processo em execucao: 2
+--- Sched: RR
+
+[STORE] Processo: 2    PC = 1    ACC antes = 6
+  Memória[numero] = 6
+
+--- Elapsed Time: 8
+--- Processo em execucao: 2
+--- Sched: RR
+
+[SUB] Processo: 2    PC = 2    ACC antes = 6
+  Subtraindo memória[controle]=2
+  ACC depois = 4
+
+--- Elapsed Time: 9
+--- Processo em execucao: 2
+--- Sched: RR
+
+[BRZERO] Processo 2    PC = 3    ACC antes = 4
+  ACC != 0, não saltou
+
+--- Elapsed Time: 10
+--- Processo em execucao: 2
+--- Sched: RR
+
+[LOAD] Processo: 2    PC = 4  Carregando memória[numero] = 6 em ACC
+  ACC depois = 6
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 11
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 2    ACC antes = 6
+  Memória[controle] = 6
+
+--- Elapsed Time: 12
+--- Processo em execucao: 1
+--- Sched: RR
+
+[BRZERO] Processo 1    PC = 3    ACC antes = 6
+  ACC != 0, não saltou
+
+--- Elapsed Time: 13
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 4  Carregando memória[a] = 0 em ACC
+  ACC depois = 0
+
+--- Elapsed Time: 14
+--- Processo em execucao: 1
+--- Sched: RR
+
+[ADD] Processo: 1    PC = 5    ACC antes = 0
+  Somando memória[b] = 1
+  ACC depois = 1
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 15
+--- Processo em execucao: 2
+--- Sched: RR
+
+[DIV] Processo 2    PC = 5    ACC antes = 6
+  Divisor =2
+  ACC depois = 3
+
+--- Elapsed Time: 16
+--- Processo em execucao: 2
+--- Sched: RR
+
+[ADD] Processo: 2    PC = 6    ACC antes = 3
+  Somando memória[b] = 3
+  ACC depois = 6
+
+--- Elapsed Time: 17
+--- Processo em execucao: 2
+--- Sched: RR
+
+[STORE] Processo: 2    PC = 7    ACC antes = 6
+  Memória[aux] = 6
+
+--- Elapsed Time: 18
+--- Processo em execucao: 2
+--- Sched: RR
+
+[LOAD] Processo: 2    PC = 8  Carregando memória[b] = 3 em ACC
+  ACC depois = 3
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 19
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 6    ACC antes = 1
+  Memória[aux] = 1
+
+--- Elapsed Time: 20
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 7  Carregando memória[b] = 1 em ACC
+  ACC depois = 1
+
+--- Elapsed Time: 21
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 8    ACC antes = 1
+  Memória[a] = 1
+
+--- Elapsed Time: 22
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 9  Carregando memória[aux] = 1 em ACC
+  ACC depois = 1
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 23
+--- Processo em execucao: 2
+--- Sched: RR
+
+[STORE] Processo: 2    PC = 9    ACC antes = 3
+  Memória[a] = 3
+
+--- Elapsed Time: 24
+--- Processo em execucao: 2
+--- Sched: RR
+
+[LOAD] Processo: 2    PC = 10  Carregando memória[aux] = 6 em ACC
+  ACC depois = 6
+
+--- Elapsed Time: 25
+--- Processo em execucao: 2
+--- Sched: RR
+
+[STORE] Processo: 2    PC = 11    ACC antes = 6
+  Memória[b] = 6
+
+--- Elapsed Time: 26
+--- Processo em execucao: 2
+--- Sched: RR
+
+[LOAD] Processo: 2    PC = 12  Carregando memória[controle] = 2 em ACC
+  ACC depois = 2
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 27
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 10    ACC antes = 1
+  Memória[b] = 1
+
+--- Elapsed Time: 28
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 11  Carregando memória[controle] = 6 em ACC
+  ACC depois = 6
+
+--- Elapsed Time: 29
+--- Processo em execucao: 1
+--- Sched: RR
+
+[SUB] Processo: 1    PC = 12    ACC antes = 6
+  Subtraindo imediato = 1
+  ACC depois = 5
+
+--- Elapsed Time: 30
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 13    ACC antes = 5
+  Memória[controle] = 5
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 31
+--- Processo em execucao: 2
+--- Sched: RR
+
+[SUB] Processo: 2    PC = 13    ACC antes = 2
+  Subtraindo imediato = 1
+  ACC depois = 1
+
+--- Elapsed Time: 32
+--- Processo em execucao: 2
+--- Sched: RR
+
+[STORE] Processo: 2    PC = 14    ACC antes = 1
+  Memória[controle] = 1
+
+--- Elapsed Time: 33
+--- Processo em execucao: 2
+--- Sched: RR
+
+[BRANY] Processo: 2    PC = 15  Salto incondicional para PC = 2
+
+--- Elapsed Time: 34
+--- Processo em execucao: 2
+--- Sched: RR
+
+[SUB] Processo: 2    PC = 2    ACC antes = 1
+  Subtraindo memória[controle]=1
+  ACC depois = 0
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 35
+--- Processo em execucao: 1
+--- Sched: RR
+
+[BRANY] Processo: 1    PC = 14  Salto incondicional para PC = 3
+
+--- Elapsed Time: 36
+--- Processo em execucao: 1
+--- Sched: RR
+
+[BRZERO] Processo 1    PC = 3    ACC antes = 5
+  ACC != 0, não saltou
+
+--- Elapsed Time: 37
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 4  Carregando memória[a] = 1 em ACC
+  ACC depois = 1
+
+--- Elapsed Time: 38
+--- Processo em execucao: 1
+--- Sched: RR
+
+[ADD] Processo: 1    PC = 5    ACC antes = 1
+  Somando memória[b] = 1
+  ACC depois = 2
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 39
+--- Processo em execucao: 2
+--- Sched: RR
+
+[BRZERO] Processo 2    PC = 3    ACC antes = 0
+  ACC == 0, salto para PC = 16
+
+--- Elapsed Time: 40
+--- Processo em execucao: 2
+--- Sched: RR
+
+[LOAD] Processo: 2    PC = 16  Carregando memória[b] = 6 em ACC
+  ACC depois = 6
+
+--- Elapsed Time: 41
+--- Processo em execucao: 2
+--- Sched: RR
+
+[SYSCALL 1 - PRINT] Processo:2
+  Saída (ACC) = 6
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 42
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 6    ACC antes = 2
+  Memória[aux] = 2
+
+--- Elapsed Time: 43
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 7  Carregando memória[b] = 1 em ACC
+  ACC depois = 1
+
+--- Elapsed Time: 44
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 8    ACC antes = 1
+  Memória[a] = 1
+
+--- Elapsed Time: 45
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 9  Carregando memória[aux] = 2 em ACC
+  ACC depois = 2
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 46
+--- Processo em execucao: 2
+--- Sched: RR
+
+[SYSCALL 0 - EXIT] Processo:2
+  Encerrando processo.
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 47
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 10    ACC antes = 2
+  Memória[b] = 2
+
+--- Elapsed Time: 48
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 11  Carregando memória[controle] = 5 em ACC
+  ACC depois = 5
+
+--- Elapsed Time: 49
+--- Processo em execucao: 1
+--- Sched: RR
+
+[SUB] Processo: 1    PC = 12    ACC antes = 5
+  Subtraindo imediato = 1
+  ACC depois = 4
+
+--- Elapsed Time: 50
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 13    ACC antes = 4
+  Memória[controle] = 4
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 51
+--- Processo em execucao: 1
+--- Sched: RR
+
+[BRANY] Processo: 1    PC = 14  Salto incondicional para PC = 3
+
+--- Elapsed Time: 52
+--- Processo em execucao: 1
+--- Sched: RR
+
+[BRZERO] Processo 1    PC = 3    ACC antes = 4
+  ACC != 0, não saltou
+
+--- Elapsed Time: 53
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 4  Carregando memória[a] = 1 em ACC
+  ACC depois = 1
+
+--- Elapsed Time: 54
+--- Processo em execucao: 1
+--- Sched: RR
+
+[ADD] Processo: 1    PC = 5    ACC antes = 1
+  Somando memória[b] = 2
+  ACC depois = 3
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 55
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 6    ACC antes = 3
+  Memória[aux] = 3
+
+--- Elapsed Time: 56
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 7  Carregando memória[b] = 2 em ACC
+  ACC depois = 2
+
+--- Elapsed Time: 57
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 8    ACC antes = 2
+  Memória[a] = 2
+
+--- Elapsed Time: 58
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 9  Carregando memória[aux] = 3 em ACC
+  ACC depois = 3
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 59
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 10    ACC antes = 3
+  Memória[b] = 3
+
+--- Elapsed Time: 60
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 11  Carregando memória[controle] = 4 em ACC
+  ACC depois = 4
+
+--- Elapsed Time: 61
+--- Processo em execucao: 1
+--- Sched: RR
+
+[SUB] Processo: 1    PC = 12    ACC antes = 4
+  Subtraindo imediato = 1
+  ACC depois = 3
+
+--- Elapsed Time: 62
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 13    ACC antes = 3
+  Memória[controle] = 3
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 63
+--- Processo em execucao: 1
+--- Sched: RR
+
+[BRANY] Processo: 1    PC = 14  Salto incondicional para PC = 3
+
+--- Elapsed Time: 64
+--- Processo em execucao: 1
+--- Sched: RR
+
+[BRZERO] Processo 1    PC = 3    ACC antes = 3
+  ACC != 0, não saltou
+
+--- Elapsed Time: 65
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 4  Carregando memória[a] = 2 em ACC
+  ACC depois = 2
+
+--- Elapsed Time: 66
+--- Processo em execucao: 1
+--- Sched: RR
+
+[ADD] Processo: 1    PC = 5    ACC antes = 2
+  Somando memória[b] = 3
+  ACC depois = 5
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 67
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 6    ACC antes = 5
+  Memória[aux] = 5
+
+--- Elapsed Time: 68
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 7  Carregando memória[b] = 3 em ACC
+  ACC depois = 3
+
+--- Elapsed Time: 69
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 8    ACC antes = 3
+  Memória[a] = 3
+
+--- Elapsed Time: 70
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 9  Carregando memória[aux] = 5 em ACC
+  ACC depois = 5
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 71
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 10    ACC antes = 5
+  Memória[b] = 5
+
+--- Elapsed Time: 72
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 11  Carregando memória[controle] = 3 em ACC
+  ACC depois = 3
+
+--- Elapsed Time: 73
+--- Processo em execucao: 1
+--- Sched: RR
+
+[SUB] Processo: 1    PC = 12    ACC antes = 3
+  Subtraindo imediato = 1
+  ACC depois = 2
+
+--- Elapsed Time: 74
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 13    ACC antes = 2
+  Memória[controle] = 2
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 75
+--- Processo em execucao: 1
+--- Sched: RR
+
+[BRANY] Processo: 1    PC = 14  Salto incondicional para PC = 3
+
+--- Elapsed Time: 76
+--- Processo em execucao: 1
+--- Sched: RR
+
+[BRZERO] Processo 1    PC = 3    ACC antes = 2
+  ACC != 0, não saltou
+
+--- Elapsed Time: 77
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 4  Carregando memória[a] = 3 em ACC
+  ACC depois = 3
+
+--- Elapsed Time: 78
+--- Processo em execucao: 1
+--- Sched: RR
+
+[ADD] Processo: 1    PC = 5    ACC antes = 3
+  Somando memória[b] = 5
+  ACC depois = 8
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 79
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 6    ACC antes = 8
+  Memória[aux] = 8
+
+--- Elapsed Time: 80
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 7  Carregando memória[b] = 5 em ACC
+  ACC depois = 5
+
+--- Elapsed Time: 81
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 8    ACC antes = 5
+  Memória[a] = 5
+
+--- Elapsed Time: 82
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 9  Carregando memória[aux] = 8 em ACC
+  ACC depois = 8
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 83
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 10    ACC antes = 8
+  Memória[b] = 8
+
+--- Elapsed Time: 84
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 11  Carregando memória[controle] = 2 em ACC
+  ACC depois = 2
+
+--- Elapsed Time: 85
+--- Processo em execucao: 1
+--- Sched: RR
+
+[SUB] Processo: 1    PC = 12    ACC antes = 2
+  Subtraindo imediato = 1
+  ACC depois = 1
+
+--- Elapsed Time: 86
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 13    ACC antes = 1
+  Memória[controle] = 1
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 87
+--- Processo em execucao: 1
+--- Sched: RR
+
+[BRANY] Processo: 1    PC = 14  Salto incondicional para PC = 3
+
+--- Elapsed Time: 88
+--- Processo em execucao: 1
+--- Sched: RR
+
+[BRZERO] Processo 1    PC = 3    ACC antes = 1
+  ACC != 0, não saltou
+
+--- Elapsed Time: 89
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 4  Carregando memória[a] = 5 em ACC
+  ACC depois = 5
+
+--- Elapsed Time: 90
+--- Processo em execucao: 1
+--- Sched: RR
+
+[ADD] Processo: 1    PC = 5    ACC antes = 5
+  Somando memória[b] = 8
+  ACC depois = 13
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 91
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 6    ACC antes = 13
+  Memória[aux] = 13
+
+--- Elapsed Time: 92
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 7  Carregando memória[b] = 8 em ACC
+  ACC depois = 8
+
+--- Elapsed Time: 93
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 8    ACC antes = 8
+  Memória[a] = 8
+
+--- Elapsed Time: 94
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 9  Carregando memória[aux] = 13 em ACC
+  ACC depois = 13
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 95
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 10    ACC antes = 13
+  Memória[b] = 13
+
+--- Elapsed Time: 96
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 11  Carregando memória[controle] = 1 em ACC
+  ACC depois = 1
+
+--- Elapsed Time: 97
+--- Processo em execucao: 1
+--- Sched: RR
+
+[SUB] Processo: 1    PC = 12    ACC antes = 1
+  Subtraindo imediato = 1
+  ACC depois = 0
+
+--- Elapsed Time: 98
+--- Processo em execucao: 1
+--- Sched: RR
+
+[STORE] Processo: 1    PC = 13    ACC antes = 0
+  Memória[controle] = 0
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 99
+--- Processo em execucao: 1
+--- Sched: RR
+
+[BRANY] Processo: 1    PC = 14  Salto incondicional para PC = 3
+
+--- Elapsed Time: 100
+--- Processo em execucao: 1
+--- Sched: RR
+
+[BRZERO] Processo 1    PC = 3    ACC antes = 0
+  ACC == 0, salto para PC = 15
+
+--- Elapsed Time: 101
+--- Processo em execucao: 1
+--- Sched: RR
+
+[LOAD] Processo: 1    PC = 15  Carregando memória[b] = 13 em ACC
+  ACC depois = 13
+
+--- Elapsed Time: 102
+--- Processo em execucao: 1
+--- Sched: RR
+
+[SYSCALL 1 - PRINT] Processo:1
+  Saída (ACC) = 13
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 103
+--- Processo em execucao: 5
+--- Sched: RR
+
+[LOAD] Processo: 5    PC = 0  Carregando memória[a] = 10 em ACC
+  ACC depois = 10
+
+--- Elapsed Time: 104
+--- Processo em execucao: 5
+--- Sched: RR
+
+[SUB] Processo: 5    PC = 1    ACC antes = 10
+  Subtraindo memória[b]=7
+  ACC depois = 3
+
+--- Elapsed Time: 105
+--- Processo em execucao: 5
+--- Sched: RR
+
+[BRZERO] Processo 5    PC = 2    ACC antes = 3
+  ACC != 0, não saltou
+
+--- Elapsed Time: 106
+--- Processo em execucao: 5
+--- Sched: RR
+
+[BRNEG] Processo 5    PC = 3    ACC antes = 3
+  ACC >= 0, não saltou
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 107
+--- Processo em execucao: 1
+--- Sched: RR
+
+[SYSCALL 0 - EXIT] Processo:1
+  Encerrando processo.
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 108
+--- Processo em execucao: 5
+--- Sched: RR
+
+[LOAD] Processo: 5    PC = 4  Carregando imediato 1 em ACC
+  ACC depois = 1
+
+--- Elapsed Time: 109
+--- Processo em execucao: 5
+--- Sched: RR
+
+[SYSCALL 1 - PRINT] Processo:5
+  Saída (ACC) = 1
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 110
+--- Processo em execucao: 4
+--- Sched: FCFS
+
+[LOAD] Processo: 4    PC = 3  Carregando imediato 1 em ACC
+  ACC depois = 1
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 111
+--- Processo em execucao: 4
+--- Sched: FCFS
+
+[SYSCALL 1 - PRINT] Processo:4
+  Saída (ACC) = 1
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 112
+--- Processo em execucao: 5
+--- Sched: RR
+
+[BRANY] Processo: 5    PC = 6  Salto incondicional para PC = 12
+
+--- Elapsed Time: 113
+--- Processo em execucao: 5
+--- Sched: RR
+
+[SYSCALL 0 - EXIT] Processo:5
+  Encerrando processo.
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 114
+--- Processo em execucao: 0
+--- Sched: FCFS
+
+[LOAD] Processo: 0    PC = 0  Carregando memória[a] = 10 em ACC
+  ACC depois = 10
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 115
+--- Processo em execucao: 0
+--- Sched: FCFS
+
+[ADD] Processo: 0    PC = 1    ACC antes = 10
+  Somando imediato = 1
+  ACC depois = 11
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 116
+--- Processo em execucao: 0
+--- Sched: FCFS
+
+[SUB] Processo: 0    PC = 2    ACC antes = 11
+  Subtraindo imediato = 2
+  ACC depois = 9
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 117
+--- Processo em execucao: 0
+--- Sched: FCFS
+
+[SYSCALL 1 - PRINT] Processo:0
+  Saída (ACC) = 9
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 118
+--- Processo em execucao: 3
+--- Sched: FCFS
+
+[LOAD] Processo: 3    PC = 0  Carregando memória[base] = 5 em ACC
+  ACC depois = 5
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 119
+--- Processo em execucao: 3
+--- Sched: FCFS
+
+[MULT] Processo: 3    PC = 1    ACC antes = 5
+  Multiplicando por memória[altura] = 8
+  ACC depois = 40
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 120
+--- Processo em execucao: 3
+--- Sched: FCFS
+
+[STORE] Processo: 3    PC = 2    ACC antes = 40
+  Memória[area] = 40
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 121
+--- Processo em execucao: 3
+--- Sched: FCFS
+
+[SYSCALL 1 - PRINT] Processo:3
+  Saída (ACC) = 40
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 122
+--- Processo em execucao: 4
+--- Sched: FCFS
+
+[SYSCALL 0 - EXIT] Processo:4
+  Encerrando processo.
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 123
+--- Processo em execucao: 0
+--- Sched: FCFS
+
+[STORE] Processo: 0    PC = 4    ACC antes = 9
+  Memória[a] = 9
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 124
+--- Processo em execucao: 0
+--- Sched: FCFS
+
+[SYSCALL 0 - EXIT] Processo:0
+  Encerrando processo.
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 125
+--- Processo em execucao: 3
+--- Sched: FCFS
+
+[SYSCALL 0 - EXIT] Processo:3
+  Encerrando processo.
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 126
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 127
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 128
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 129
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 130
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 131
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 132
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 133
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 134
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 135
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 136
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 137
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 138
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 139
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 140
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 141
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 142
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 143
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 144
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 145
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 146
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 147
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 148
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 149
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 150
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 151
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 152
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 153
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 154
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 155
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 156
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 157
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 158
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 159
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 160
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 161
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 162
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 163
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 164
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 165
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 166
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 167
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 168
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 169
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 170
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 171
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 172
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 173
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 174
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 175
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 176
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 177
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 178
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 179
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 180
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 181
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 182
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 183
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 184
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 185
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 186
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 187
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 188
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 189
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 190
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 191
+--- CPU em idle 
+
+=======================   ESCALONADOR ACIONADO    =======================
+
+--- Elapsed Time: 192
+--- CPU em idle 
