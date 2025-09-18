@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <map>
 
 Processo Parser::parse(const std::string& nome_arquivo) {
     Processo processo;
@@ -126,8 +127,23 @@ void Parser::passo2_gerar_estruturas(std::ifstream& arquivo, Processo& processo,
                 instr.operando_val = std::stoi(op.substr(1));
             } else {
                 instr.modo = ModoEnderecamento::DIRETO;
-                if (tabelaDeLabels.count(op)) {
-                    instr.operando_val = tabelaDeLabels.at(op);
+                if (instr.opcode == OpCode::SYSCALL) {
+                    if (!op.empty()) {
+                        instr.operando_val = std::stoi(op);
+                    } else {
+                        instr.operando_val = 0;
+                    }
+                } else if (
+                    instr.opcode == OpCode::BRANY  ||
+                    instr.opcode == OpCode::BRPOS  ||
+                    instr.opcode == OpCode::BRZERO ||
+                    instr.opcode == OpCode::BRNEG
+                ) {
+                    if (tabelaDeLabels.count(op)) {
+                        instr.operando_val = tabelaDeLabels.at(op);
+                    } else {
+                        instr.operando_val = 0; 
+                    }
                 } else {
                     instr.operando_val = 0; 
                 }
@@ -154,13 +170,17 @@ void Parser::passo2_gerar_estruturas(std::ifstream& arquivo, Processo& processo,
                 processo.sched = Scheduling::RR;
                 // Corrigindo a lógica de prioridade para usar o valor do enum
                 //std::cout <<"here" << std::endl;
-                processo.prio =std::stoi(valor);
+                processo.quantum = valor.empty() ? 1 : std::stoi(valor);
+                processo.restante_quantum = processo.quantum;
             }
             if (tipo == "FCFS") {
                 processo.sched = Scheduling::FCFS;
             }
             if (tipo == "arrival") {
                 processo.arrival_time = std::stoi(valor);
+            }
+            if (tipo == "prio") {
+                processo.prio = std::stoi(valor);
             }
         }
     }
